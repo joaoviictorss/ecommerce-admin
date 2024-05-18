@@ -26,10 +26,5 @@ export default async function DashboardLayout({
     redirect("/");
   }
 
-  return (
-    <>
-      <div>Aqui tera uma NavBar</div>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
