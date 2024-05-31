@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import * as z from "zod";
-import { Store } from "@prisma/client";
+import { Billboard } from "@prisma/client";
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,18 +25,22 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
-
-interface SettingsFormProps {
-  initialData: Store;
-}
+import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-  name: z.string().min(1, "Nome da loja é obrigatório"),
+  label: z.string().min(1, "Nome da publicação é obrigatório"),
+  imageUrl: z.string().min(1, "O link da imagem é obrigatório"),
 });
 
-type SettingsFormsValues = z.infer<typeof formSchema>;
+type BillboardFormsValues = z.infer<typeof formSchema>;
 
-export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
+interface BillboardFormProps {
+  initialData: Billboard | null;
+}
+
+export const BillboardForm: React.FC<BillboardFormProps> = ({
+  initialData,
+}) => {
   const params = useParams();
   const router = useRouter();
   const origin = useOrigin();
@@ -45,18 +49,36 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const [loading, setLoading] = useState(false);
   // States para modal de alerta
 
+  const title = initialData ? "Editar publicação" : "Criar publicação";
+  const description = initialData
+    ? "Editar uma publicação"
+    : "Adicionar uma publicação";
+  const toatsMessage = initialData
+    ? "Publicação atualizada."
+    : "Publicação criada.";
+  const action = initialData ? "Salvar alterações" : "Criar";
 
-  const form = useForm<SettingsFormsValues>({
+  const form = useForm<BillboardFormsValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: initialData || {
+      label: "",
+      imageUrl: "",
+    },
   });
 
-  const onSubmit = async (data: SettingsFormsValues) => {
+  const onSubmit = async (data: BillboardFormsValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, data);
+      if (initialData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          data
+        );
+      } else {
+        await axios.post(`/api/${params.storeId}/billboards`, data);
+      }
       router.refresh();
-      toast.success("Loja atualizada.");
+      toast.success(toatsMessage);
     } catch (error) {
       toast.error("Algo deu errado! :(");
     } finally {
@@ -67,13 +89,15 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`
+      );
       router.refresh();
       router.push("/");
-      toast.success("Loja excluída");
+      toast.success("Painel excluido!");
     } catch (error) {
       toast.error(
-        "Certifique-se de remover todos os produtos e categorias primeiro"
+        "Certifique-se de remover todos os produtos e categorias deste painel primeiro"
       );
     } finally {
       setLoading(false);
@@ -90,18 +114,17 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         loading={loading}
       />
       <div className="flex items-center justify-between">
-        <Heading
-          title="Configurações"
-          description="Gerenciar preferencias da loja"
-        />
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="icon"
-          onClick={() => setOpen(true)}
-        >
-          <Trash className="size-4" />
-        </Button>
+        <Heading title={title} description={description} />
+        {initialData && (
+          <Button
+            disabled={loading}
+            variant="destructive"
+            size="icon"
+            onClick={() => setOpen(true)}
+          >
+            <Trash className="size-4" />
+          </Button>
+        )}
       </div>
       <Separator />
       <Form {...form}>
@@ -109,17 +132,35 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-8"
         >
+          <FormField
+            control={form.control}
+            name="label"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Imagem de fundo</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
-              name="name"
+              name="label"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Nome da loja"
+                      placeholder="Nome do produto"
                       {...field}
                     />
                   </FormControl>
@@ -129,16 +170,11 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
             />
           </div>
           <Button disabled={loading} className="ml-auto" type="submit">
-            Salvar mudanças
+            {action}
           </Button>
         </form>
       </Form>
       <Separator />
-      <ApiAlert
-        title="NEXT_PUBLIC_API_URL"
-        description={`${origin}/api/${params.storeId}`}
-        variant="public"
-      />
     </>
   );
 };
