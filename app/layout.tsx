@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="pt-br">
+      <html lang="pt-BR">
         <body className={inter.className}>
           <ToastProvider />
           <ModalProvider />

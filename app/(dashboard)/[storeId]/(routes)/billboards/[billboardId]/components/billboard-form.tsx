@@ -77,7 +77,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
       } else {
         await axios.post(`/api/${params.storeId}/billboards`, data);
       }
-      router.refresh();
+      router.push(`/${params.storeId}/billboards`);
       toast.success(toatsMessage);
     } catch (error) {
       toast.error("Algo deu errado! :(");
@@ -134,7 +134,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         >
           <FormField
             control={form.control}
-            name="label"
+            name="imageUrl"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Imagem de fundo</FormLabel>
