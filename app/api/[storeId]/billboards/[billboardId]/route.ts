@@ -78,41 +78,41 @@ export async function PATCH(
   }
 }
 
-export async function DELETE(
+export async function DELETE (
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string, billboardId: string }}
 ) {
   try {
-    const { userId } = auth();
+      const { userId } = auth();
 
-    if (!userId) {
-      return new NextResponse("Não autenticado", { status: 401 });
-    }
+      if (!userId) {
+          return new NextResponse("Não autenticado", { status: 401 })
+      }
 
-    if (!params.billboardId) {
-      return new NextResponse("BillboardId é obrigatório", { status: 400 });
-    }
+      if(!params.billboardId) {
+          return new NextResponse("Billboard id é obrigatorio", { status: 400 });
+      }
 
-    const storeByUserId = await prismadb.store.findFirst({
-      where: {
-        id: params.storeId,
-        userId,
-      },
-    });
+      const storeByUserId = await prismadb.store.findFirst({
+          where: {
+              id: params.storeId,
+              userId
+          }
+      })
 
-    if (!storeByUserId) {
-      return new NextResponse("Não autorizado", { status: 403 });
-    }
+      if (!storeByUserId) {
+          return new NextResponse("Sem autorização", { status: 403 });
+      }
 
-    const billboard = await prismadb.store.deleteMany({
-      where: {
-        id: params.billboardId,
-      },
-    });
+      const billboard = await prismadb.billboard.deleteMany({
+          where: {
+              id: params.billboardId,
+          }
+      })
 
-    return NextResponse.json(billboard);
-  } catch (error) {
-    console.log(`[BILLBOARD_DELETE]`, error);
-    return new NextResponse("Internal error", { status: 500 });
+      return NextResponse.json(billboard);
+  } catch (err) {
+      console.log('[BILLBOARD_DELETE]', err)
+      return new NextResponse('Internal error', { status: 500 })
   }
 }
