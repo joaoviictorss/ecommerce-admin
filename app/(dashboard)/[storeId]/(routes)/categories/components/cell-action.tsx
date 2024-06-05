@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { BillboardColumn } from "./columns";
+import { CategoryColumn } from "./columns";
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import {
@@ -19,7 +19,7 @@ import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: CategoryColumn;
 }
 
 export const CellAction = ({ data }: CellActionProps) => {
@@ -31,20 +31,18 @@ export const CellAction = ({ data }: CellActionProps) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Id da seção copiada para a area de transferencia!");
+    toast.success("Id da categoria copiada para a area de transferencia!");
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/billboards/${data.id}`
-      );
+      await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
-      toast.success("Painel excluido!");
+      toast.success("Categoria excluido!");
     } catch (error) {
       toast.error(
-        "Certifique-se de remover todos os produtos e categorias deste painel primeiro"
+        "Certifique-se de remover todos os produtos da sua categorias"
       );
     } finally {
       setLoading(false);
@@ -75,7 +73,7 @@ export const CellAction = ({ data }: CellActionProps) => {
             Copiar ID
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => router.push(`billboards/${data.id}`)}
+            onClick={() => router.push(`categories/${data.id}`)}
           >
             <Edit className="mr-2 size-4" />
             Editar
