@@ -33,7 +33,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string, productId: string } }
+  { params }: { params: { storeId: string; productId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -100,7 +100,7 @@ export async function PATCH(
           deleteMany: {},
         },
         isArchived,
-        isFeatured
+        isFeatured,
       },
     });
 

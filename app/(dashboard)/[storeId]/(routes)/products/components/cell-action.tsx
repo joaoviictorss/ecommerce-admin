@@ -37,15 +37,11 @@ export const CellAction = ({ data }: CellActionProps) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/products/${data.id}`
-      );
+      await axios.delete(`/api/${params.storeId}/products/${data.id}`);
       router.refresh();
       toast.success("Produto excluido!");
     } catch (error) {
-      toast.error(
-        "Algo deu errado"
-      );
+      toast.error("Algo deu errado");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -74,9 +70,7 @@ export const CellAction = ({ data }: CellActionProps) => {
             <Copy className="mr-2 size-4" />
             Copiar ID
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => router.push(`products/${data.id}`)}
-          >
+          <DropdownMenuItem onClick={() => router.push(`products/${data.id}`)}>
             <Edit className="mr-2 size-4" />
             Editar
           </DropdownMenuItem>
