@@ -71,7 +71,7 @@ export async function GET(
 
     return NextResponse.json(sizes);
   } catch (error) {
-    console.log(`[SIZES_POST]`, error);
+    console.log(`[SIZES_GET]`, error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }

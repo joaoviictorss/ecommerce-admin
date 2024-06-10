@@ -147,7 +147,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({ initialData }) => {
               name="value"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Medida</FormLabel>
+                  <FormLabel>Código</FormLabel>
                   <FormControl>
                     <div className="flex items-center gap-x-4">
                       <Input

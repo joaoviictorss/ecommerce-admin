@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ImagePlus, Trash } from "lucide-react";
-import { CldUploadWidget } from 'next-cloudinary'
+import { CldUploadWidget } from "next-cloudinary";
 
 import { Button } from "./button";
 
@@ -52,36 +52,30 @@ const ImageUpload = ({
                 <Trash className="size-4" />
               </Button>
             </div>
-            <Image
-              fill
-              
-              alt="Image"
-              src={url}
-            />
+            <Image fill className="object-cover" alt="Image" src={url} />
           </div>
         ))}
       </div>
-      <CldUploadWidget uploadPreset="huspizg3"
-        onSuccess={(result) => {
-          onUpload(result);
-        }}
+      <CldUploadWidget
+        uploadPreset="huspizg3"
+        onUpload={onUpload}
       >
         {({ open }) => {
           const onClick = () => {
-            open()
-          }
+            open();
+          };
 
-          return(
+          return (
             <Button
               type="button"
               disabled={disabled}
-              variant='secondary'
+              variant="secondary"
               onClick={onClick}
             >
-              <ImagePlus className="size-4 mr-2"/>
+              <ImagePlus className="size-4 mr-2" />
               Escolher uma imagem
             </Button>
-          )
+          );
         }}
       </CldUploadWidget>
     </div>
