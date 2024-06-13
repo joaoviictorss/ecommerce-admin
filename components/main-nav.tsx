@@ -20,7 +20,7 @@ export function MainNav({
     },
     {
       href: `/${params.storeId}/billboards`,
-      label: "Painel publicitário",
+      label: "Seções",
       active: pathname === `/${params.storeId}/billboards`,
     },
     {

@@ -22,7 +22,7 @@ export const BillboardClient = ({ data }: BillboardClientProps) => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Painel publicitário (${data.length})`}
+          title={`Seções (${data.length})`}
           description="Gerencie as seções da sua loja"
         />
         <Button

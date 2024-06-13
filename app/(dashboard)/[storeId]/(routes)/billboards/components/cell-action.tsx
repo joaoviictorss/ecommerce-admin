@@ -41,10 +41,10 @@ export const CellAction = ({ data }: CellActionProps) => {
         `/api/${params.storeId}/billboards/${data.id}`
       );
       router.refresh();
-      toast.success("Painel excluido!");
+      toast.success("Seção excluida!");
     } catch (error) {
       toast.error(
-        "Certifique-se de remover todos os produtos e categorias deste painel primeiro"
+        "Certifique-se de remover todos os produtos e categorias desta seção primeiro"
       );
     } finally {
       setLoading(false);
