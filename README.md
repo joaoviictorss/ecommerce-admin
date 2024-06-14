@@ -19,6 +19,23 @@ Bem-vindo ao Administrador de E-commerce! Este projeto foi desenvolvido junto co
 - **Gerenciamento de Seções**: Organize os produtos em diferentes seções do e-commerce.
 - **Dashboard de Vendas**: Acompanhe e analise as vendas através de um painel intuitivo.
 
+## Variveis de ambiente
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= pk_test_c3RpcnJpbmctc25hcHBlci01MS5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY= clerk chave secreta
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+DATABASE_URL= conecta prisma ao banco de dados
+
+DIRECT_URL= url do banco de dados
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME= cloudnary name
+
+STRIPE_API_KEY= chave de api do stripe
+FRONTEND_STORE_URL= url da loja criada no ecommerce-store
+STRIPE_WEBHOOK_SECRET = stripe webhook
+
 ## Pré-requisitos
 
 Antes de iniciar, certifique-se de ter o seguinte instalado em sua máquina:
