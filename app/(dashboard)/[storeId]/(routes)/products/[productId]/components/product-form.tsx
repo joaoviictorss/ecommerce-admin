@@ -127,7 +127,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       router.refresh();
       toast.success("Produto excluido!");
     } catch (error) {
-      toast.error("Algo deu errado :(");
+      toast.error(`Algo deu errado :( Produtos presentes em pedidos nao fianalizados não podem serem excluidos!`);
     } finally {
       setLoading(false);
       setOpen(false);
