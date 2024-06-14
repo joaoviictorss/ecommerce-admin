@@ -61,4 +61,10 @@ Antes de iniciar, certifique-se de ter o seguinte instalado em sua máquina:
 
     Guardar o id da loja para adicionar nas variaveis de ambiente de Ecommerce-store
 
+4.  **Inicie o servidor de desenvolvimento:**
+
+    ```bash
+    npm run dev
+
+
 
