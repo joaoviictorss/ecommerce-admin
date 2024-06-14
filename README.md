@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# E-commerce Admin
 
-## Getting Started
+Bem-vindo ao Administrador de E-commerce! Este projeto foi desenvolvido junto com o professor Antonio do canal Code with Antonio, trata-se de um administrador de ecommerce desenvolvido para facilitar o gerenciamento de produtos, tamanhos, cores e seções de um e-commerce, além de fornecer um dashboard completo para o gerenciamento das vendas.
 
-First, run the development server:
+## Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js**: Framework React para renderização do lado do servidor e geração de sites estáticos.
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Zustand**: Biblioteca para gerenciamento de estado.
+- **Clerk**: Solução de autenticação e gerenciamento de usuários.
+- **Tailwind CSS**: Framework CSS para estilização.
+- **ShadcnUI**: Biblioteca de componentes UI para React.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Gerenciamento de Produtos**: Adicione, edite e remova produtos do e-commerce.
+- **Gerenciamento de Tamanhos**: Gerencie os diferentes tamanhos disponíveis para os produtos.
+- **Gerenciamento de Cores**: Adicione e gerencie as cores disponíveis para os produtos.
+- **Gerenciamento de Seções**: Organize os produtos em diferentes seções do e-commerce.
+- **Dashboard de Vendas**: Acompanhe e analise as vendas através de um painel intuitivo.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Pré-requisitos
 
-## Learn More
+Antes de iniciar, certifique-se de ter o seguinte instalado em sua máquina:
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js
+- NPM ou Yarn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Como Rodar o Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone o repositório:**
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   cd nome-do-repositorio
+   
+2. **Instalar dependencias:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm install
+    ```
+  
+3.  **Authenticar e criar uma loja**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    Guardar o id da loja para adicionar nas variaveis de ambiente de Ecommerce-store
+
+
