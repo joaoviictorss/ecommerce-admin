@@ -48,8 +48,8 @@ Antes de iniciar, certifique-se de ter o seguinte instalado em sua máquina:
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
+   git clone https://github.com/seu-usuario/ecommerce-admin.git
+   cd ecommerce-admin
    
 2. **Instalar dependencias:**
 
