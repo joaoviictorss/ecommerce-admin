@@ -48,7 +48,7 @@ Antes de iniciar, certifique-se de ter o seguinte instalado em sua máquina:
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/ecommerce-admin.git
+   git clone https://github.com/joaoviictorss/ecommerce-admin.git
    cd ecommerce-admin
    
 2. **Instalar dependencias:**
